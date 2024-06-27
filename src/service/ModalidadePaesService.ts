@@ -4,20 +4,19 @@ import { ModalidadePaesRepository } from "../repository/ModalidadePaesRepository
 export class ModalidadePaesService {
     modalidadePaesRepository: ModalidadePaesRepository = new ModalidadePaesRepository();
 
-    cadastrarModalidade(modalidade: any) {
-        const { nome, isVegano } = modalidade
-        if (!nome || !isVegano) {
+    cadastrarModalidade(modalidade: ModalidadePaes) {
+        const { nome, vegano } = modalidade
+        if (!nome || !vegano) {
             throw new Error("Informações incompletas")
         }
 
-        const novaModalidade = new ModalidadePaes(nome, isVegano)
-        this.modalidadePaesRepository.insereModalidade(novaModalidade)
+        const novaModalidade = new ModalidadePaes(nome, vegano)
+        this.modalidadePaesRepository.insereModalidade(JSON.parse(JSON.stringify(novaModalidade)))
         return novaModalidade
     }
 
     consultarModalidade(id: any): ModalidadePaes | undefined {
         const idNumber: number = parseInt(id, 10)
-        console.log(id)
         return this.modalidadePaesRepository.filtrarModalidadePorId(idNumber)
     }
 
@@ -25,28 +24,28 @@ export class ModalidadePaesService {
         return this.modalidadePaesRepository.filtrarTodasModalidades()
     }
 
-    deletarModalidade(id: any) {
-        const modalidade = this.consultarModalidade(id)
+    deletarModalidade(id: string) {
+        const idNumber = parseInt(id)
+        const modalidade = this.consultarModalidade(idNumber)
         if (!modalidade) {
             throw new Error("Modalidade não encontrada")
         }
 
-        this.modalidadePaesRepository.deletaModalidade(modalidade)
+        return this.modalidadePaesRepository.deletaModalidade(idNumber)
     }
 
-    atualizarModalidade(modalidadeData: any): ModalidadePaes {
-        const { id, nome, isVegano } = modalidadeData
-        if (!nome || !isVegano || !id) {
+    atualizarModalidade(modalidadeData: ModalidadePaes): ModalidadePaes {
+        const { id, nome, vegano } = modalidadeData
+        if (!nome || !vegano || !id) {
             throw new Error("Informações incompletas")
         }
-
-        let modalidadeEnconstrada = this.consultarModalidade(id)
-        if (!modalidadeEnconstrada) {
+        let modalidadeEncontrada = this.consultarModalidade(id)
+        if (!modalidadeEncontrada) {
             throw new Error("Modalidade não encontrada!!!")
         }
-        modalidadeEnconstrada._isVegano = isVegano
-        modalidadeEnconstrada.nome = nome
-        this.modalidadePaesRepository.atualizaModalidade(modalidadeEnconstrada)
-        return modalidadeEnconstrada
+        modalidadeEncontrada.vegano = vegano
+        modalidadeEncontrada.nome = nome
+        this.modalidadePaesRepository.atualizaModalidade(modalidadeEncontrada)
+        return modalidadeEncontrada
     }
 }

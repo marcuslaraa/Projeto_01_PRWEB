@@ -1,30 +1,42 @@
 import { ModalidadePaes } from '../model/ModalidadePaes'
 
+export const modalidadePaesList: ModalidadePaes[] = [
+  {
+    id: 1,
+    nome: "Pão italiano",
+    vegano: true
+}
+]
 export class ModalidadePaesRepository {
-  modalidadePaesList: ModalidadePaes[] = []
+
+  get list() {
+    return modalidadePaesList
+  }
 
   insereModalidade(modalidade: ModalidadePaes) {
-    this.modalidadePaesList.push(modalidade)
+    modalidadePaesList.push(modalidade)
   }
 
   filtrarModalidadePorId(id: number): ModalidadePaes | undefined {
-    return this.modalidadePaesList.find(modalidade => modalidade._id === id)
+    return modalidadePaesList.find(modalidade => modalidade.id === id)
   }
 
   filtrarTodasModalidades(): ModalidadePaes[] {
-    return this.modalidadePaesList
+    return modalidadePaesList
   }
 
-  deletaModalidade(modalidade: ModalidadePaes) {
-    const index = this.modalidadePaesList.indexOf(modalidade)
+  deletaModalidade(id: number) {
+    const index = modalidadePaesList.findIndex(modalidade => modalidade.id === id)
+
     if (index !== -1) {
-      this.modalidadePaesList.splice(index, 1)
+      modalidadePaesList.splice(index, 1)
     }
   }
+
   atualizaModalidade(modalidade: ModalidadePaes): number {
-    const index = this.modalidadePaesList.indexOf(modalidade)
+    const index = modalidadePaesList.indexOf(modalidade)
     if (index !== -1) {
-      this.modalidadePaesList[index] = modalidade
+      modalidadePaesList[index] = modalidade
     }
     return index
   }
