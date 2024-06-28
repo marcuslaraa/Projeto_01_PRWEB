@@ -8,14 +8,17 @@ export class ModalidadePaesService {
         const existeNomeModalidade: boolean = modalidadePaesList.some((m) => m.nome === modalidade.nome)
         if(modalidadePaesList.length < 3) {
             const { nome, vegano } = modalidade
-            if (!nome || !vegano || existeNomeModalidade) {
+            if (!nome || !vegano) {
                 throw new Error("Informações invalidas")
+            } else if (existeNomeModalidade) {
+                throw new Error("Nome da modalidade já existe.")
             }
             const novaModalidade = new ModalidadePaes(nome, vegano)
             this.modalidadePaesRepository.insereModalidade(JSON.parse(JSON.stringify(novaModalidade)))
             return novaModalidade
+        } else {
+            throw new Error("Número de modalidades atingida")
         }
-        throw new Error("Número de modalidades atingida")
     }
 
     consultarModalidade(id: any): ModalidadePaes | undefined {
