@@ -2,13 +2,16 @@ import { generateId } from '../utils/generateId'
 import { ItemVenda } from './ItemVenda'
 
 export class VendaPaes {
-  _Id: number
-  _cpfCliente: string
-  _valorTotal: number = 0
-  _itensComprados: Array<ItemVenda> = []
+  id: number
+  cpfCliente: string
+  valorTotal: number
+  itensVenda: Array<ItemVenda> = []
 
-  constructor(cpfCliente: string) {
-    this._Id = generateId()
-    this._cpfCliente = cpfCliente
+  constructor(cpfCliente: string, itensVenda: ItemVenda[] ) {
+    this.id = generateId()
+    this.cpfCliente = cpfCliente
+    this.valorTotal =  10
+    this.itensVenda = itensVenda
   }
+
 }

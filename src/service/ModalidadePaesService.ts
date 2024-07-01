@@ -40,12 +40,13 @@ export class ModalidadePaesService {
             throw new Error("Informações incompletas")
         }
         let modalidadeEncontrada = this.consultarModalidade(id)
-        if (!modalidadeEncontrada) {
+        if (modalidadeEncontrada) {
+            modalidadeEncontrada.vegano = vegano
+            modalidadeEncontrada.nome = nome
+            this.modalidadePaesRepository.atualizaModalidade(modalidadeEncontrada)
+        } else {
             throw new Error("Modalidade não encontrada!!!")
         }
-        modalidadeEncontrada.vegano = vegano
-        modalidadeEncontrada.nome = nome
-        this.modalidadePaesRepository.atualizaModalidade(modalidadeEncontrada)
         return modalidadeEncontrada
     }
 }
