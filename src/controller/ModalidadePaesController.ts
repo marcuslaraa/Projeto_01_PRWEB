@@ -11,7 +11,7 @@ export function cadastrarModalidade(req: Request, res: Response) {
       modalidade: novaModalidade
     })
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 }
 

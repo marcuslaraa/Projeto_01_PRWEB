@@ -3,10 +3,6 @@ import { ModalidadePaes } from '../model/ModalidadePaes'
 export const modalidadePaesList: ModalidadePaes[] = []
 export class ModalidadePaesRepository {
 
-  get list() {
-    return modalidadePaesList
-  }
-
   insereModalidade(modalidade: ModalidadePaes) {
     modalidadePaesList.push(modalidade)
   }

@@ -1,7 +1,6 @@
-import { ModalidadePaesRepository, modalidadePaesList } from '../repository/ModalidadePaesRepository'
+import { modalidadePaesList } from '../repository/ModalidadePaesRepository'
 import { EstoquePaesRepository } from '../repository/EstoquePaesRepository'
 import { EstoquePaes } from '../model/EstoquePaes'
-import { ModalidadePaesService } from './ModalidadePaesService'
 
 export class EstoquePaesService {
   estoquePaesRepository: EstoquePaesRepository = new EstoquePaesRepository()

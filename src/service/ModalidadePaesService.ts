@@ -1,18 +1,24 @@
 import { ModalidadePaes } from "../model/ModalidadePaes"
-import { ModalidadePaesRepository } from "../repository/ModalidadePaesRepository"
+import { ModalidadePaesRepository, modalidadePaesList } from "../repository/ModalidadePaesRepository"
 
 export class ModalidadePaesService {
     modalidadePaesRepository: ModalidadePaesRepository = new ModalidadePaesRepository();
 
     cadastrarModalidade(modalidade: ModalidadePaes) {
-        const { nome, vegano } = modalidade
-        if (!nome || !vegano) {
-            throw new Error("Informações incompletas")
+        const existeNomeModalidade: boolean = modalidadePaesList.some((m) => m.nome === modalidade.nome)
+        if(modalidadePaesList.length < 3) {
+            const { nome, vegano } = modalidade
+            if (!nome || !vegano) {
+                throw new Error("Informações invalidas")
+            } else if (existeNomeModalidade) {
+                throw new Error("Nome da modalidade já existe.")
+            }
+            const novaModalidade = new ModalidadePaes(nome, vegano)
+            this.modalidadePaesRepository.insereModalidade(JSON.parse(JSON.stringify(novaModalidade)))
+            return novaModalidade
+        } else {
+            throw new Error("Número de modalidades atingida")
         }
-
-        const novaModalidade = new ModalidadePaes(nome, vegano)
-        this.modalidadePaesRepository.insereModalidade(JSON.parse(JSON.stringify(novaModalidade)))
-        return novaModalidade
     }
 
     consultarModalidade(id: any): ModalidadePaes | undefined {
