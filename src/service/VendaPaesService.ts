@@ -13,14 +13,21 @@ export class VendaPaesService {
    if(!cpfCliente || !itensVenda) {
     throw new Error("Itens inválidos")
    }
-   const estoquePaesId = itensVenda[0].estoquePaesId
-   const existeEstoque = this.estoquePaesService.consultarEstoque(estoquePaesId)
-  //  if(existeEstoque) {
-  //   const precoTotal
-  //  }
-   console.log(existeEstoque)
 
-   const novaVenda = new VendaPaes(cpfCliente, itensVenda)
+   let valorTotal = 0
+
+   itensVenda.map((item) => {
+    const estoquePaesId = item.estoquePaesId
+    const estoqueExiste = this.estoquePaesService.consultarEstoque(estoquePaesId)
+    if(estoqueExiste && estoqueExiste.quantidade > item.quantidade) {
+      valorTotal += item.quantidade * estoqueExiste.precoVenda
+      estoqueExiste.quantidade -= item.quantidade
+    } else {
+      throw new Error("Estoque de pães não existe.")
+    }
+   })
+
+   const novaVenda = new VendaPaes(cpfCliente, itensVenda, valorTotal)
    this.vendaPaesRepository.insereVenda(novaVenda)
    return novaVenda
   }

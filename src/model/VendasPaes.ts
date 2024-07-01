@@ -7,10 +7,10 @@ export class VendaPaes {
   valorTotal: number
   itensVenda: Array<ItemVenda> = []
 
-  constructor(cpfCliente: string, itensVenda: ItemVenda[] ) {
+  constructor(cpfCliente: string, itensVenda: ItemVenda[], valorTotal: number ) {
     this.id = generateId()
     this.cpfCliente = cpfCliente
-    this.valorTotal =  10
+    this.valorTotal =  valorTotal
     this.itensVenda = itensVenda
   }
 
