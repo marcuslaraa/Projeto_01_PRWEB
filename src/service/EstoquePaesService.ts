@@ -1,5 +1,5 @@
 import { modalidadePaesList } from '../repository/ModalidadePaesRepository'
-import { EstoquePaesRepository } from '../repository/EstoquePaesRepository'
+import { EstoquePaesRepository, estoquePaesList } from '../repository/EstoquePaesRepository'
 import { EstoquePaes } from '../model/EstoquePaes'
 
 export class EstoquePaesService {
@@ -15,7 +15,8 @@ export class EstoquePaesService {
 
     const novoEstoque = new EstoquePaes(modalidadeId, quantidade, precoVenda)
     const existeModalidade = modalidadePaesList.find((modalidade) => modalidade.id === modalidadeId)
-    if (existeModalidade) {
+    const existeEstoque = estoquePaesList.find((estoque) => estoque.modalidadeId === modalidadeId)
+    if (existeModalidade && !existeEstoque) {
       this.estoquePaesRepository.insereEstoque(novoEstoque)
     } else {
       throw new Error("Modalidade não existe")

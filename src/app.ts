@@ -1,7 +1,7 @@
 import express from 'express'
 import { atualizarModalidade, cadastrarModalidade, consultarModalidade, deletarModalidade, listaModalidades } from './controller/ModalidadePaesController'
 import { insereEstoque, listaEstoques, consultarEstoque, atualizarEstoque, deletarQuantidadeEstoque  } from './controller/EstoquePaesController'
-import { insereVenda } from './controller/VendaPaesController'
+import { insereVenda, listaVendas } from './controller/VendaPaesController'
 
 
 const app = express()
@@ -29,6 +29,7 @@ app.delete('/api/estoque', deletarQuantidadeEstoque)
 
 /*VENDAS PAES*/
 app.post('/api/venda', insereVenda)
+app.get('/api/venda', listaVendas)
 
 
 app.listen(PORT, logInfo)

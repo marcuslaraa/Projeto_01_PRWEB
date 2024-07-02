@@ -7,4 +7,8 @@ export class VendaPaesRepository {
   insereVenda(venda: VendaPaes) {
     vendaPaesList.push(venda)
   }
+
+  filtrarTodasVendas(): VendaPaes[] {
+    return vendaPaesList
+  }
 }
