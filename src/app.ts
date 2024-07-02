@@ -14,7 +14,7 @@ function logInfo() {
 
 
 /*MODALIDADES PAES*/
-app.get('/api/modalidade/todas', listaModalidades)
+app.get('/api/modalidade/todos', listaModalidades)
 app.get('/api/modalidade/:id', consultarModalidade)
 app.post('/api/modalidade', cadastrarModalidade)
 app.put('/api/modalidade', atualizarModalidade)
