@@ -8,7 +8,7 @@ export class ModalidadePaesService {
         const existeNomeModalidade: boolean = modalidadePaesList.some((m) => m.nome === modalidade.nome)
         if(modalidadePaesList.length < 3) {
             const { nome, vegano } = modalidade
-            if (!nome || !vegano) {
+            if (!nome || vegano === undefined) {
                 throw new Error("Informações invalidas")
             } else if (existeNomeModalidade) {
                 throw new Error("Nome da modalidade já existe.")

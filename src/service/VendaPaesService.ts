@@ -3,7 +3,6 @@ import { VendaPaesRepository } from '../repository/VendaPaesRepository';
 import { EstoquePaesService } from './EstoquePaesService'
 import { ModalidadePaesService } from './ModalidadePaesService'
 
-
 export class VendaPaesService {
   vendaPaesRepository = new VendaPaesRepository()
   estoquePaesService = new EstoquePaesService()
@@ -16,12 +15,10 @@ export class VendaPaesService {
    }
 
    let valorTotal: number = 0
-   let nome: string | undefined;
+   let nomeModalidade: string | undefined;
    itensVenda.map((item) => {
     const estoquePaesId = item.estoquePaesId
     const estoqueExiste = this.estoquePaesService.consultarEstoque(estoquePaesId)
-    const nomeModalidade = this.modalidadePaesService.consultarModalidade(estoqueExiste?.modalidadeId)?.nome
-    nome = nomeModalidade
     if(estoqueExiste && estoqueExiste.quantidade > item.quantidade) {
       valorTotal += item.quantidade * estoqueExiste.precoVenda
       estoqueExiste.quantidade -= item.quantidade
@@ -32,7 +29,6 @@ export class VendaPaesService {
 
    const novaVenda = new VendaPaes(cpfCliente, itensVenda, valorTotal)
    this.vendaPaesRepository.insereVenda(novaVenda)
-
    return novaVenda
   }
 
