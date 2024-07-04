@@ -16,7 +16,7 @@ export function consultarEstoque(req: Request, res: Response) {
       res.status(400).json({ mensagem: "Estoque não encontrado" })
     }
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
 
   }
 }
@@ -29,7 +29,7 @@ export function insereEstoque(req: Request, res: Response) {
       item: novoEstoque
     })
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 
 }
@@ -37,7 +37,7 @@ export function listaEstoques(req: Request, res: Response) {
   try {
     res.status(200).json(estoquePaesService.todosEstoques())
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 
 }
@@ -50,7 +50,7 @@ export function atualizarEstoque(req: Request, res: Response) {
     })
 
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 }
 
@@ -63,6 +63,6 @@ export function deletarQuantidadeEstoque(req: Request, res: Response) {
     })
 
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 }

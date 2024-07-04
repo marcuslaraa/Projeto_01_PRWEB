@@ -11,7 +11,7 @@ export function insereVenda(req: Request, res: Response) {
       item: novaVenda
     })
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 
 }
@@ -21,6 +21,6 @@ export function listaVendas(req: Request, res: Response) {
   try {
     res.status(200).json(vendaPaesService.todasVendas())
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 }

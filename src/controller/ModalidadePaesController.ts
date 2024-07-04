@@ -28,7 +28,7 @@ export function consultarModalidade(req: Request, res: Response) {
       res.status(400).json({ mensagem: "Modalidade não encontrada" })
     }
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
 
   }
 }
@@ -37,7 +37,7 @@ export function listaModalidades(req: Request, res: Response) {
   try {
     res.status(200).json(modalidadePaesService.todasModalidade())
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 }
 
@@ -54,7 +54,7 @@ export function deletarModalidade(req: Request, res: Response) {
       res.status(400).json({ mensagem: "Modalidade não encontrada" })
     }
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 }
 
@@ -67,6 +67,6 @@ export function atualizarModalidade(req: Request, res: Response) {
     })
 
   } catch (error: any) {
-    res.status(400).json({ mensagem: error.mensagem })
+    res.status(400).json({ mensagem: error.message })
   }
 }
